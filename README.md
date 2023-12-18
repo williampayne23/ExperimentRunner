@@ -3,6 +3,9 @@
 Adapted from an experiment I was running to allow me to reuse this code. Lets me run lots of LLM calls without
 worrying too much about whether they fail because there's CLI tools for rerunning fails, and evaluating outputs. 
 
+
+> It uses Bun to run. If that doesn't work for you then try compiling it into js. I just wanted some speedy typed scripting
+
 It's half opinionated half not since I've been making it more generic as I use it and run into opinionated segments
 It's not made for implementing big agents which need to be in docker containers of have lots of tools
 It assumes a discrete step function for each experiment
