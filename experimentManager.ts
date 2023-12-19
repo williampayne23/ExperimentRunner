@@ -17,7 +17,7 @@ export type IRunner<T, G = string> = {
 export type IScore = "CORRECT" | "INCORRECT" | null;
 
 export class Run<T, G = string> {
-    context: OpenAI.ChatCompletionMessage[] = [];
+    context: OpenAI.ChatCompletionMessageParam[] = [];
     logs: any[] = [];
     status: IRunStatus = "READY";
     data: T;
