@@ -1,6 +1,9 @@
 import OpenAI from "openai";
 import { ExperimentREPL } from "./experimentREPL";
 
+//This is to polyfil console.table because Bun is bad
+import {} from './common'
+
 export type IRunStatus = "COMPLETE" | "INCOMPLETE" | "FAIL" | "READY";
 
 export type SerializedRun<T extends Run<any, any>> = ReturnType<T["serialized"]>;
