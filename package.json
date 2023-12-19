@@ -1,0 +1,15 @@
+{
+  "name": "experimentrunner",
+  "version": "1.0.0",
+  "description": "Adapted from an experiment I was running to allow me to reuse this code. Lets me run lots of LLM calls without worrying too much about whether they fail because there's CLI tools for rerunning fails, and evaluating outputs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "openai": "^4.23.0",
+    "zod": "^3.22.4"
+  }
+}
