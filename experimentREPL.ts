@@ -135,7 +135,11 @@ export class ExperimentREPL<T, G = string> {
             aliases: ["load"],
             parser: z.tuple([z.string().describe("Path to file")]).rest(z.string().describe("Remaining arguments")),
             run: async (path, ...args) => {
-                await this.experiment.load_from_file(path, ...args);
+                if (this.experiment.load_from_file != undefined) {
+                    await this.experiment.load_from_file(path, ...args);
+                }else{
+                    console.log("No load_from_file function defined")
+                }
             },
             description: "Load from file",
         })

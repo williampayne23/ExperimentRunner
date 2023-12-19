@@ -60,17 +60,24 @@ export const runner: IRunner<ParamsType, ResultType> = {
 
 Construct an experiment from your runner
 ```typescript
-const experiment = new Experiment<ParamsType, ResultType>(
-    //Optionally provide a function for reading files and creating a batch of runs
-    async (exp, name, string_k) => {
-        try {
-            const qs = await getQuestions(name);
-            const k = parseInt(string_k ?? "1");
-            const batch = await batchFromQs(qs, k, "gpt-3.5-turbo");
-            exp.addBatch(batch);
-        } catch { }
-    }
-);
+const experiment = new Experiment<ParamsType, ResultType>();
+
+//Optionally provide a function for reading files and creating a batch of runs
+experiment.addLoadFunction(
+    async (exp, file_name, string_k) => {
+        const qs = await getQuestions(file_name);
+        const k = parseInt(string_k ?? "1");
+        const runs = qs.map(
+                (q) =>
+                new Run<ParamsType, ResultType>(runner, {
+                        question: q,
+                        k,
+                        model,
+                    })
+                );
+        const batch = new Batch("batchName", runs)
+        exp.addBatch(batch);
+    });
 
 experiment.startCommandLine();
 ```

@@ -164,9 +164,9 @@ export class Experiment<T, G = string> {
     batches: Batch<T, G>[] = [];
     complete: boolean = false;
     cancel_thottled_runs: boolean = false;
-    load_from_file: (name: string, ...args: string[]) => Promise<void>;
+    load_from_file?: (name: string, ...args: string[]) => Promise<void>;
 
-    constructor(load_from_file: (exp: Experiment<T, G>, name: string, ...args: string[]) => Promise<void>) {
+    addLoadFunction(load_from_file: (exp: Experiment<T, G>, name: string, ...args: string[]) => Promise<void>) {
         this.load_from_file = (name: string, ...args: string[]) => load_from_file(this, name, ...args);
     }
 
