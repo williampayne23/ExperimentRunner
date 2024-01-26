@@ -162,12 +162,21 @@ export class ExperimentREPL<T, G = string> {
             description: "Get details of a run",
         })
         repl.addFunction({
-            aliases: ["run_one"],
+            aliases: ["run"],
             parser: z.tuple([z.string().describe("Address")]),
             run: (addr) => {
-                this.experiment.runOne(addr);
+                const addresses = this.getRunAddresses([addr]);
+                addresses.forEach((a) => {
+                    this.experiment.runOne(a);
+                });
             },
             description: "Run one run",
+        })
+        repl.addFunction({
+            aliases: ["status", "s"],
+            run: () => {
+                console.log(this.experiment.getStatus());
+            }
         })
         repl.run();
     }

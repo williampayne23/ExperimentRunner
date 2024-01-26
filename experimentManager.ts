@@ -6,7 +6,7 @@ import {} from './common'
 
 export type IRunStatus = "COMPLETE" | "INCOMPLETE" | "FAIL" | "READY";
 
-export type SerializedRun<T extends Run<any, any>> = ReturnType<T["serialized"]>;
+export type SerializedRun<T, G = string> = ReturnType<Run<T, G>["serialized"]>;
 
 export type IRunner<T, G = string> = {
     setup: (run: Run<T, G>) => Promise<boolean> | boolean;
@@ -32,7 +32,7 @@ export class Run<T, G = string> {
 
     static fromSerialized<T, U = string>(
         runner: IRunner<T, U>,
-        serialized: SerializedRun<Run<T, U>>
+        serialized: SerializedRun<T, U>
     ) {
         const run = new Run(runner, serialized.data);
         run.answer = serialized.answer;
